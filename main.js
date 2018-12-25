@@ -7,18 +7,35 @@ class Block {
     this.data = data
     this.previousHash = previousHash
     this.hash = this.calculateHash()
+    this.nonce = 0
   }
 
   calculateHash() {
     return SHA256(
-      this.data + this.previousHash + this.timestamp + JSON.stringify(this.data)
+      this.data +
+        this.previousHash +
+        this.timestamp +
+        JSON.stringify(this.data) +
+        this.nonce
     ).toString()
+  }
+
+  mineBlock(difficulty) {
+    while (
+      this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')
+    ) {
+      this.nonce++
+      this.hash = this.calculateHash()
+    }
+
+    console.log(('Block mined!', this.hash))
   }
 }
 
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()]
+    this.difficulty = 4
   }
 
   createGenesisBlock() {
@@ -26,12 +43,13 @@ class Blockchain {
   }
 
   getLatestBlock() {
-    return this.chain[this.chain.length /*?*/ - 1]
+    return this.chain[this.chain.length - 1]
   }
 
   addBlock(newBlock) {
     newBlock.previousHash = this.getLatestBlock().hash
-    newBlock.hash = newBlock.calculateHash()
+    // newBlock.hash = newBlock.calculateHash()
+    newBlock.mineBlock(this.difficulty)
     this.chain.push(newBlock)
   }
 
@@ -54,13 +72,19 @@ class Blockchain {
 
 const CharJSCoin = new Blockchain() //?
 
-CharJSCoin.addBlock(new Block(1, '10/07/2017', { amount: 4 }))
-CharJSCoin.addBlock(new Block(2, '10/17/2017', { amount: 10 }))
+console.log('Mining Block')
+CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 4 })) /*?.*/
 
-console.log(JSON.stringify(CharJSCoin, null, 4))
-console.log('Is vaild? ', CharJSCoin.isChainValid())
+console.log('Mining Block')
+CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 10 }))
 
-CharJSCoin.chain[1].data = { amount: 100 }
-CharJSCoin.chain[1].hash = CharJSCoin.chain[1].calculateHash()
+// CharJSCoin.addBlock(new Block(1, '10/07/2017', { amount: 4 }))
+// CharJSCoin.addBlock(new Block(2, '10/17/2017', { amount: 10 }))
 
-console.log('Is vaild? ', CharJSCoin.isChainValid())
+// console.log(JSON.stringify(CharJSCoin, null, 4))
+// console.log('Is vaild? ', CharJSCoin.isChainValid())
+
+// CharJSCoin.chain[1].data = { amount: 100 }
+// CharJSCoin.chain[1].hash = CharJSCoin.chain[1].calculateHash()
+
+// console.log('Is vaild? ', CharJSCoin.isChainValid())

@@ -1,10 +1,19 @@
 const SHA256 = require('crypto-js/sha256')
 
+const { map } = require('ramda')
+
+class Transaction {
+  constructor(fromAddress, toAddress, amount) {
+    this.fromAddress = fromAddress
+    this.toAddress = toAddress
+    this.amount = amount
+  }
+}
+
 class Block {
-  constructor(index, timestamp, data, previousHash) {
-    this.index = index
+  constructor(timestamp, transactions, previousHash) {
     this.timestamp = timestamp
-    this.data = data
+    this.transactions = transactions
     this.previousHash = previousHash
     this.hash = this.calculateHash()
     this.nonce = 0
@@ -12,7 +21,7 @@ class Block {
 
   calculateHash() {
     return SHA256(
-      this.data +
+      this.transactions +
         this.previousHash +
         this.timestamp +
         JSON.stringify(this.data) +
@@ -24,33 +33,64 @@ class Block {
     while (
       this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')
     ) {
-      this.nonce++
+      this.nonce++ //?
       this.hash = this.calculateHash()
     }
 
-    console.log(('Block mined!', this.hash))
+    console.log('Block mined!', this.hash)
   }
 }
 
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()]
-    this.difficulty = 4
+    this.difficulty = 1
+    this.pendingTransactions = []
+    this.miningReward = 10
   }
 
   createGenesisBlock() {
-    return new Block(0, '01/01/2017', 'Genesis Block', '0')
+    return new Block('01/01/2017', 'Genesis Block', '0')
   }
 
   getLatestBlock() {
     return this.chain[this.chain.length - 1]
   }
 
-  addBlock(newBlock) {
-    newBlock.previousHash = this.getLatestBlock().hash
-    // newBlock.hash = newBlock.calculateHash()
-    newBlock.mineBlock(this.difficulty)
-    this.chain.push(newBlock)
+  // ! miners chose transactioms
+  minePendingTranscations(miningRewardAddress) {
+    let block = new Block(Date.now(), this.pendingTransactions) //?
+    block.mineBlock(this.difficulty)
+
+    console.log('Block Mined!')
+    this.chain.push(block)
+
+    // Could add more coins but P2P checks will not allow
+    this.pendingTransactions = [
+      new Transaction(null, miningRewardAddress, this.miningReward)
+    ]
+  }
+
+  createTransaction(transaction) {
+    this.pendingTransactions.push(transaction)
+  }
+
+  getBalanceOfAddress(address) {
+    let balance = 0
+
+    for (const block of this.chain) {
+      for (const trans of block.transactions) {
+        if (trans.fromAddress === address) {
+          balance -= trans.amount
+        }
+
+        if (trans.toAddress === address) {
+          balance += trans.amount
+        }
+      }
+    }
+
+    return balance //?
   }
 
   isChainValid() {
@@ -70,21 +110,15 @@ class Blockchain {
   }
 }
 
-const CharJSCoin = new Blockchain() //?
+const CharJSCoin = new Blockchain()
 
-console.log('Mining Block')
-CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 4 })) /*?.*/
+CharJSCoin.createTransaction(new Transaction('address 1', 'address 2', 100))
+CharJSCoin.createTransaction(new Transaction('address 2', 'address 1', 50))
 
-console.log('Mining Block')
-CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 10 }))
+CharJSCoin.minePendingTranscations('charlie')
 
-// CharJSCoin.addBlock(new Block(1, '10/07/2017', { amount: 4 }))
-// CharJSCoin.addBlock(new Block(2, '10/17/2017', { amount: 10 }))
+console.log(CharJSCoin.getBalanceOfAddress('charlie'))
 
-// console.log(JSON.stringify(CharJSCoin, null, 4))
-// console.log('Is vaild? ', CharJSCoin.isChainValid())
+CharJSCoin.minePendingTranscations('charlie')
 
-// CharJSCoin.chain[1].data = { amount: 100 }
-// CharJSCoin.chain[1].hash = CharJSCoin.chain[1].calculateHash()
-
-// console.log('Is vaild? ', CharJSCoin.isChainValid())
+console.log(CharJSCoin.getBalanceOfAddress('charlie'))

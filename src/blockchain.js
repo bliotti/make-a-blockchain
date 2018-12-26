@@ -91,7 +91,7 @@ class Blockchain {
     return this.chain[this.chain.length - 1]
   }
 
-  // ! miners chose transactioms
+  // ! miners choose transactions
   minePendingTranscations(miningRewardAddress) {
     const rewardTx = new Transaction(
       null,
@@ -155,9 +155,9 @@ class Blockchain {
       if (currentBlock.hash !== currentBlock.calculateHash()) {
         return false
       }
-      currentBlock.previousHash //?
+      currentBlock //?
       previousBlock.calculateHash() //?
-      previousBlock.hash //?
+      previousBlock //?
       if (currentBlock.previousHash !== previousBlock.calculateHash()) {
         return 3
       }
@@ -188,6 +188,6 @@ CharJSCoin.minePendingTranscations(myWalletAddress)
 
 console.log(CharJSCoin.getBalanceOfAddress(myWalletAddress))
 
-CharJSCoin.chain[1].transactions[0].amount = 1
+// CharJSCoin.chain[1].transactions[0].amount = 1
 
 console.log(CharJSCoin.isChainValid())

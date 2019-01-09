@@ -43,6 +43,11 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
+hexy@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/hexy/-/hexy-0.3.0.tgz#53c00a95a0baf1d813040d59490eaeab45bad091"
+  integrity sha512-+pMQUQCkl1DQ/Im/Y3wixzIr2j8+o8gRIcB3Dw5n5kcbPwPGEEde9hfX3HzRzR00pS/8NmSohSvYnhBs0jA4hw==
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"

@@ -50,18 +50,3 @@ class Blockchain {
     // return true
   }
 }
-
-const CharJSCoin = new Blockchain() //?
-
-CharJSCoin.addBlock(new Block(1, '10/07/2017', { amount: 4 }))
-CharJSCoin.addBlock(new Block(2, '10/17/2017', { amount: 10 }))
-
-console.log(JSON.stringify(CharJSCoin, null, 4))
-
-console.log('Is vaild? ', CharJSCoin.isChainValid())
-
-CharJSCoin.chain[1].data = { amount: 100 }
-
-CharJSCoin.chain[1].hash = CharJSCoin.chain[1].calculateHash()
-
-console.log('Is vaild? ', CharJSCoin.isChainValid())

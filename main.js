@@ -7,13 +7,13 @@ const SHA256 = require('crypto-js/sha256')
 // for now data will represent our transactions
 
 class Block {
-  constructor(index, timestamp, data, previousHash) {
-    // this.index = index
-    // this.timestamp = timestamp
-    // this.data = data
-    // this.previousHash = previousHash
-    // this.hash = this.calculateHash()
-  }
+  // constructor(index, timestamp, data, previousHash) {
+  //   this.index = index
+  //   this.timestamp = timestamp
+  //   this.data = data
+  //   this.previousHash = previousHash
+  //   this.hash = this.calculateHash()
+  // }
 
   // Here we will hash the contents of our block
   // SHA256 returns this as an object so we need to convert this to a string
@@ -28,13 +28,12 @@ class Block {
 // BLOCKCHAIN CLASS
 // the constructor function initialzes our blockchain this is an ARRAY of blocks
 // for now data will represent our transactions
-//
 
 class Blockchain {
   // initialize the chain with the genesis block
-  constructor() {
-    // this.chain = [this.createGenesisBlock()]
-  }
+  // constructor() {
+  //   this.chain = [this.createGenesisBlock()]
+  // }
 
   // The first block on the blockchain is called the genesis block
   // This needs to be added MANUALLY
@@ -70,16 +69,16 @@ class Blockchain {
 
   isChainValid() {
     // for (let i = 1; i < this.chain.length; i++) {
-    // const currentBlock = this.chain[i]
-    // const previousBlock = this.chain[i - 1]
-    // Check if the block is still valid
-    // if (currentBlock.hash !== currentBlock.calculateHash()) {
-    // return false
-    // }
-    // Check if blocks point to prev. block
-    // if (currentBlock.previousHash !== previousBlock.hash) {
-    // return false
-    // }
+    //   const currentBlock = this.chain[i]
+    //   const previousBlock = this.chain[i - 1]
+    //   // Check if the block is still valid
+    //   if (currentBlock.hash !== currentBlock.calculateHash()) {
+    //     return false
+    //   }
+    //   // Check if blocks point to prev. block
+    //   if (currentBlock.previousHash !== previousBlock.hash) {
+    //     return false
+    //   }
     // }
     // return true
   }
@@ -102,14 +101,10 @@ class Blockchain {
 // const CharJSCoin = new Blockchain()
 // CharJSCoin.addBlock(new Block(1, '10/07/2017', { amount: 4 }))
 // CharJSCoin.addBlock(new Block(2, '10/17/2017', { amount: 10 }))
-
 // console.log('Is chain vaild? ', CharJSCoin.isChainValid())
-
 // CharJSCoin.chain[1].data = { amount: 100 }
-
 // CharJSCoin.chain[1].hash = CharJSCoin.chain[1].calculateHash()
-// console.log('Is vaild? ', CharJSCoin.isChainValid())
-
+// console.log('Is chain vaild? ', CharJSCoin.isChainValid())
 // 👌 2nd Test
 
 // The relationship to the previous block has been broken.

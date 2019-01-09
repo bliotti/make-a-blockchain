@@ -7,21 +7,21 @@ const SHA256 = require('crypto-js/sha256')
 // for now data will represent our transactions
 
 class Block {
-  // constructor(index, timestamp, data, previousHash) {
-  //   this.index = index
-  //   this.timestamp = timestamp
-  //   this.data = data
-  //   this.previousHash = previousHash
-  //   this.hash = this.calculateHash()
-  // }
+  constructor(index, timestamp, data, previousHash) {
+    this.index = index
+    this.timestamp = timestamp
+    this.data = data
+    this.previousHash = previousHash
+    this.hash = this.calculateHash()
+  }
 
   // Here we will hash the contents of our block
   // SHA256 returns this as an object so we need to convert this to a string
 
   calculateHash() {
-    // return SHA256(
-    //   this.data + this.previousHash + this.timestamp + JSON.stringify(this.data)
-    // ).toString()
+    return SHA256(
+      this.data + this.previousHash + this.timestamp + JSON.stringify(this.data)
+    ).toString()
   }
 }
 
@@ -31,9 +31,9 @@ class Block {
 
 class Blockchain {
   // initialize the chain with the genesis block
-  // constructor() {
-  //   this.chain = [this.createGenesisBlock()]
-  // }
+  constructor() {
+    this.chain = [this.createGenesisBlock()]
+  }
 
   // The first block on the blockchain is called the genesis block
   // This needs to be added MANUALLY
@@ -41,13 +41,13 @@ class Blockchain {
   // Since we do not have a previous hash this can be any random data
 
   createGenesisBlock() {
-    // return new Block(0, '01/01/2017', 'Genesis Block', '0')
+    return new Block(0, '01/01/2017', 'Genesis Block', '0')
   }
 
   // Make a method to return the latest block on the chain
 
   getLatestBlock() {
-    // return this.chain[this.chain.length - 1]
+    return this.chain[this.chain.length - 1]
   }
 
   // This method adds a new block to the chain
@@ -58,9 +58,9 @@ class Blockchain {
   // Typically there are checks in plave such as "proof of work" before a block can be added.
 
   addBlock(newBlock) {
-    // newBlock.previousHash = this.getLatestBlock().hash
-    // newBlock.hash = newBlock.calculateHash()
-    // this.chain.push(newBlock)
+    newBlock.previousHash = this.getLatestBlock().hash
+    newBlock.hash = newBlock.calculateHash()
+    this.chain.push(newBlock)
   }
 
   // 👉 Let's test what we have so far
@@ -68,19 +68,19 @@ class Blockchain {
   // NOTE we do not start from block 0
 
   isChainValid() {
-    // for (let i = 1; i < this.chain.length; i++) {
-    //   const currentBlock = this.chain[i]
-    //   const previousBlock = this.chain[i - 1]
-    //   // Check if the block is still valid
-    //   if (currentBlock.hash !== currentBlock.calculateHash()) {
-    //     return false
-    //   }
-    //   // Check if blocks point to prev. block
-    //   if (currentBlock.previousHash !== previousBlock.hash) {
-    //     return false
-    //   }
-    // }
-    // return true
+    for (let i = 1; i < this.chain.length; i++) {
+      const currentBlock = this.chain[i]
+      const previousBlock = this.chain[i - 1]
+      // Check if the block is still valid
+      if (currentBlock.hash !== currentBlock.calculateHash()) {
+        return false
+      }
+      // Check if blocks point to prev. block
+      if (currentBlock.previousHash !== previousBlock.hash) {
+        return false
+      }
+    }
+    return true
   }
 
   //
@@ -98,13 +98,13 @@ class Blockchain {
 // Now, lets add a that method to check for validity.
 
 // 👌 2nd Test
-// const CharJSCoin = new Blockchain()
-// CharJSCoin.addBlock(new Block(1, '10/07/2017', { amount: 4 }))
-// CharJSCoin.addBlock(new Block(2, '10/17/2017', { amount: 10 }))
-// console.log('Is chain vaild? ', CharJSCoin.isChainValid())
-// CharJSCoin.chain[1].data = { amount: 100 }
-// CharJSCoin.chain[1].hash = CharJSCoin.chain[1].calculateHash()
-// console.log('Is chain vaild? ', CharJSCoin.isChainValid())
+const CharJSCoin = new Blockchain()
+CharJSCoin.addBlock(new Block(1, '10/07/2017', { amount: 4 }))
+CharJSCoin.addBlock(new Block(2, '10/17/2017', { amount: 10 }))
+console.log('Is chain vaild? ', CharJSCoin.isChainValid())
+CharJSCoin.chain[1].data = { amount: 100 }
+CharJSCoin.chain[1].hash = CharJSCoin.chain[1].calculateHash()
+console.log('Is chain vaild? ', CharJSCoin.isChainValid())
 // 👌 2nd Test
 
 // The relationship to the previous block has been broken.

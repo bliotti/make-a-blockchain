@@ -1,7 +1,5 @@
 const SHA256 = require('crypto-js/sha256')
 
-const { map } = require('ramda')
-
 class Transaction {
   constructor(fromAddress, toAddress, amount) {
     this.fromAddress = fromAddress
@@ -37,7 +35,7 @@ class Block {
       this.hash = this.calculateHash()
     }
 
-    console.log('Block mined!', this.hash)
+    console.log('Block Mined!', this.hash)
   }
 }
 
@@ -57,12 +55,11 @@ class Blockchain {
     return this.chain[this.chain.length - 1]
   }
 
-  // ! miners chose transactioms
+  // ! miners choose transactioms
   minePendingTranscations(miningRewardAddress) {
     let block = new Block(Date.now(), this.pendingTransactions) //?
     block.mineBlock(this.difficulty)
 
-    console.log('Block Mined!')
     this.chain.push(block)
 
     // Could add more coins but P2P checks will not allow
@@ -117,8 +114,8 @@ CharJSCoin.createTransaction(new Transaction('address 2', 'address 1', 50))
 
 CharJSCoin.minePendingTranscations('charlie')
 
-console.log(CharJSCoin.getBalanceOfAddress('charlie'))
+console.log('Balance: ', CharJSCoin.getBalanceOfAddress('charlie'))
 
 CharJSCoin.minePendingTranscations('charlie')
 
-console.log(CharJSCoin.getBalanceOfAddress('charlie'))
+console.log('Balance: ', CharJSCoin.getBalanceOfAddress('charlie'))

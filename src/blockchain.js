@@ -18,14 +18,14 @@ class Transaction {
     this.amount = amount
   }
 
-  // add a calculateHash method to generate the hash of a transaction.
+  // ADD a calculateHash method to generate the hash of a transaction.
   // instead of signing the trans. we will signing the hash of it.
 
   // calculateHash() {
   //   return SHA256(this.fromAddress + this.toAddress + this.amount).toString()
   // }
 
-  // add a method called signTransaction
+  // ADD a method called signTransaction
   // signingKey arguement is a obj. that contains the private and public key
 
   // signTransaction(signingKey) {
@@ -43,7 +43,7 @@ class Transaction {
   //   this.signature = sig.toDER('hex')
   // }
 
-  // Lets add another method to verify if the trans. has been correctly signined
+  // Lets ADD another method to verify if the trans. has been correctly signined
 
   // isValid() {
   //   // Mining reward case: since fromAddress is null from a mining reward trans return true
@@ -93,7 +93,7 @@ class Block {
     console.log('Block successfully mined!', this.hash)
   }
 
-  // add method hasValidTransaction to verify all trans. in current block
+  // ADD method hasValidTransaction to verify all trans. in current block
 
   // hasValidTransaction() {
   //   // method loops over all trans. to check signature
@@ -183,7 +183,7 @@ class Blockchain {
       const currentBlock = this.chain[i]
       const previousBlock = this.chain[i - 1]
 
-      // lets add a check to verify if all the trans. in the currentBlock are valid
+      // lets ADD a check to verify if all the trans. in the currentBlock are valid
 
       // if (!currentBlock.hasValidTransaction()) {
       //   return false

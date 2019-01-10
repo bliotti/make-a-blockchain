@@ -95,13 +95,13 @@ class Blockchain {
 }
 
 // 🍓 TEST
-const CharJSCoin = new Blockchain() //?
+// const CharJSCoin = new Blockchain() //?
 
-console.log('Mining Block 1...')
-CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 4 })) /*?.*/
+// console.log('Mining Block 1...')
+// CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 4 })) /*?.*/
 
-console.log('Mining Block 2...')
-CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 10 }))
+// console.log('Mining Block 2...')
+// CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 10 }))
 // 🍓 TEST
 
 // NOTE that the hashes started with 2 zeros

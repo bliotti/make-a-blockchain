@@ -25,31 +25,34 @@ class Block {
     this.data = data
     this.previousHash = previousHash
     this.hash = this.calculateHash()
-    // this.nonce = 0
+    this.nonce = 0
   }
 
   calculateHash() {
     return SHA256(
-      this.data + this.previousHash + this.timestamp + JSON.stringify(this.data)
-      // + this.nonce
+      this.data +
+        this.previousHash +
+        this.timestamp +
+        JSON.stringify(this.data) +
+        this.nonce
     ).toString()
   }
 
   // add new method called mineblock that takes in an argument (num) difficulty
 
-  // mineBlock(difficulty) {
-  //   // create a while loop that keeps checking if the hash of the block fulfills diff. requirment
-  //   // this is an endless loop unless we add a nonce value
-  //   // random number to change the hash
-  //   while (
-  //     this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')
-  //   ) {
-  //     this.nonce++
-  //     this.hash = this.calculateHash()
-  //   }
-  //   console.log(('Block mined:', this.hash))
-  //   console.log('Nonce ', this.nonce)
-  // }
+  mineBlock(difficulty) {
+    // create a while loop that keeps checking if the hash of the block fulfills diff. requirment
+    // this is an endless loop unless we add a nonce value
+    // random number to change the hash
+    while (
+      this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')
+    ) {
+      this.nonce++
+      this.hash = this.calculateHash()
+    }
+    console.log(('Block mined:', this.hash))
+    console.log('Nonce ', this.nonce)
+  }
 }
 
 // Lets update our blockchain with the mineBlock method
@@ -57,7 +60,7 @@ class Block {
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()]
-    // this.difficulty = 2
+    this.difficulty = 2
   }
 
   createGenesisBlock() {
@@ -72,8 +75,8 @@ class Blockchain {
 
   addBlock(newBlock) {
     newBlock.previousHash = this.getLatestBlock().hash
-    //// newBlock.hash = newBlock.calculateHash() // old method
-    // newBlock.mineBlock(this.difficulty)
+    // newBlock.hash = newBlock.calculateHash() // old method
+    newBlock.mineBlock(this.difficulty)
     this.chain.push(newBlock)
   }
 
@@ -95,13 +98,13 @@ class Blockchain {
 }
 
 // 🍓 TEST
-// const CharJSCoin = new Blockchain() //?
+const CharJSCoin = new Blockchain() //?
 
-// console.log('Mining Block 1...')
-// CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 4 })) /*?.*/
+console.log('Mining Block 1...')
+CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 4 })) /*?.*/
 
-// console.log('Mining Block 2...')
-// CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 10 }))
+console.log('Mining Block 2...')
+CharJSCoin.addBlock(new Block(1, '01/01/18', { amount: 10 }))
 // 🍓 TEST
 
 // NOTE that the hashes started with 2 zeros

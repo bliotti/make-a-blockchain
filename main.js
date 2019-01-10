@@ -93,30 +93,24 @@ class Blockchain {
 
   //
 
-  minePendingTranscations(miningRewardAddress) {
-    let block = new Block(
-      Date.now(),
-      this.pendingTransactions,
-      this.getLatestBlock().hash
-    )
-
-    // mine the block
-
-    block.mineBlock(this.difficulty)
-
-    // Once complete log success and add it to the chain
-
-    console.log('Block successfully mined!')
-    this.chain.push(block)
-
-    // Now we need to reset the pending transactions array
-    // also we create a new trans to give the miner his reward in the next block
-    // Their is no from address in a mining reward (called coinbase transaction)
-
-    this.pendingTransactions = [
-      new Transaction(null, miningRewardAddress, this.miningReward)
-    ]
-  }
+  // minePendingTranscations(miningRewardAddress) {
+  //   let block = new Block(
+  //     Date.now(),
+  //     this.pendingTransactions,
+  //     this.getLatestBlock().hash
+  //   )
+  //   // mine the block
+  //   block.mineBlock(this.difficulty)
+  //   // Once complete log success and add it to the chain
+  //   console.log('Block successfully mined!')
+  //   this.chain.push(block)
+  //   // Now we need to reset the pending transactions array
+  //   // also we create a new trans to give the miner his reward in the next block
+  //   // Their is no from address in a mining reward (called coinbase transaction)
+  //   this.pendingTransactions = [
+  //     new Transaction(null, miningRewardAddress, this.miningReward)
+  //   ]
+  // }
 
   // printBlocks() {
   //   for (const block of this.chain) {
@@ -147,28 +141,28 @@ class Blockchain {
 
   //
 
-  getBalanceOfAddress(address) {
-    // start balance at zero
-    let balance = 0
+  // getBalanceOfAddress(address) {
+  //   // start balance at zero
+  //   let balance = 0
 
-    // nested for loops yeeeaaa....
-    // loop over all the blocks in the chain
-    for (const block of this.chain) {
-      // loop over all the trans in a block
-      for (const trans of block.transactions) {
-        // if you are the fromAddress deduct
-        if (trans.fromAddress === address) {
-          balance -= trans.amount
-        }
-        // if you are the toAddress increase
-        if (trans.toAddress === address) {
-          balance += trans.amount
-        }
-      }
-    }
+  //   // nested for loops yeeeaaa....
+  //   // loop over all the blocks in the chain
+  //   for (const block of this.chain) {
+  //     // loop over all the trans in a block
+  //     for (const trans of block.transactions) {
+  //       // if you are the fromAddress deduct
+  //       if (trans.fromAddress === address) {
+  //         balance -= trans.amount
+  //       }
+  //       // if you are the toAddress increase
+  //       if (trans.toAddress === address) {
+  //         balance += trans.amount
+  //       }
+  //     }
+  //   }
 
-    return balance
-  }
+  //   return balance
+  // }
 
   isChainValid() {
     for (let i = 1; i < this.chain.length; i++) {

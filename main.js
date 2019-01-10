@@ -13,13 +13,9 @@ const SHA256 = require('crypto-js/sha256')
 // also remove it from the createGenesisBlock method
 
 class Block {
-  constructor(
-    timestamp,
-    //  transactions,
-    previousHash
-  ) {
+  constructor(timestamp, transactions, previousHash) {
     this.timestamp = timestamp
-    // this.transactions = transactions
+    this.transactions = transactions
     this.previousHash = previousHash
     this.hash = this.calculateHash()
     this.nonce = 0
@@ -49,13 +45,13 @@ class Block {
 
 // Lets define what a transaction looks like by creating a new Transaction class
 
-// class Transaction {
-//   constructor(fromAddress, toAddress, amount) {
-//     this.fromAddress = fromAddress
-//     this.toAddress = toAddress
-//     this.amount = amount
-//   }
-// }
+class Transaction {
+  constructor(fromAddress, toAddress, amount) {
+    this.fromAddress = fromAddress
+    this.toAddress = toAddress
+    this.amount = amount
+  }
+}
 
 // Now lets work on our main blockchain class
 
@@ -73,7 +69,7 @@ class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()]
     this.difficulty = 4
-    // this.pendingTransactions = []
+    this.pendingTransactions = []
     this.miningReward = 100
   }
 
@@ -90,8 +86,6 @@ class Blockchain {
 
   // When a miner calls this method, they pass along their address to recieve the reward
   // if they are able to successfully mine the block
-
-  //
 
   minePendingTranscations(miningRewardAddress) {
     let block = new Block(
@@ -118,11 +112,11 @@ class Blockchain {
     ]
   }
 
-  // printBlocks() {
-  //   for (const block of this.chain) {
-  //     console.log('======================\n', JSON.stringify(block, null, 4))
-  //   }
-  // }
+  printBlocks() {
+    for (const block of this.chain) {
+      console.log('======================\n', JSON.stringify(block, null, 4))
+    }
+  }
 
   // miners choose transactions since blocks cannot be more than 1Mb (fee)
 
@@ -188,15 +182,17 @@ class Blockchain {
 }
 
 // 🌶 TEST
-// const CharJSCoin = new Blockchain()
-// CharJSCoin.createTransaction(new Transaction('address 1', 'address 2', 100))
-// CharJSCoin.createTransaction(new Transaction('address 2', 'address 1', 50))
+const CharJSCoin = new Blockchain()
+CharJSCoin.createTransaction(new Transaction('address 1', 'address 2', 100))
+CharJSCoin.createTransaction(new Transaction('address 2', 'address 1', 50))
 
-// console.log('\n Starting the miner...')
-// CharJSCoin.minePendingTranscations('Charlie')
+console.log('\n Starting the miner...')
+CharJSCoin.minePendingTranscations('Charlie')
 
-// console.log('Balance: ', CharJSCoin.getBalanceOfAddress('Charlie'))
+console.log('Balance: ', CharJSCoin.getBalanceOfAddress('Charlie'))
 
-// CharJSCoin.minePendingTranscations('Charlie')
-// console.log('Balance: ', CharJSCoin.getBalanceOfAddress('Charlie'))
+CharJSCoin.minePendingTranscations('Charlie')
+console.log('Balance: ', CharJSCoin.getBalanceOfAddress('Charlie'))
+
+CharJSCoin.printBlocks()
 // 🌶 TEST

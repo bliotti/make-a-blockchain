@@ -145,7 +145,7 @@ class Blockchain {
     this.pendingTransactions = []
   }
 
-  //.... changed previously createTransaction
+  //.... changed method to addTransaction from createTransaction
 
   // addTransaction(transaction) {
   //   if (!transaction.fromAddress || !transaction.toAddress) {

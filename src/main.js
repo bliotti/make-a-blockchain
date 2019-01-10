@@ -14,6 +14,6 @@ CharJSCoin.addTransaction(tx1)
 
 CharJSCoin.minePendingTranscations(myWalletAddress)
 
-console.log(CharJSCoin.getBalanceOfAddress(myWalletAddress))
+console.log('Balance: ', CharJSCoin.getBalanceOfAddress(myWalletAddress))
 
-console.log(CharJSCoin.isChainValid())
+console.log('Is the chain valid? ', CharJSCoin.isChainValid())

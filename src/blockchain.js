@@ -62,7 +62,7 @@ class Block {
       this.hash = this.calculateHash()
     }
 
-    console.log('Block mined!', this.hash)
+    console.log('Block succesfully mined!', this.hash)
   }
 
   hasValidTransaction() {
@@ -91,7 +91,6 @@ class Blockchain {
     return this.chain[this.chain.length - 1]
   }
 
-  // ! miners choose transactions
   minePendingTranscations(miningRewardAddress) {
     const rewardTx = new Transaction(
       null,
@@ -155,11 +154,11 @@ class Blockchain {
       if (currentBlock.hash !== currentBlock.calculateHash()) {
         return false
       }
-      currentBlock //?
+
       previousBlock.calculateHash() //?
-      previousBlock //?
+
       if (currentBlock.previousHash !== previousBlock.calculateHash()) {
-        return 3
+        return false
       }
     }
     return true
@@ -184,10 +183,11 @@ const tx1 = new Transaction(myWalletAddress, 'pub', 10)
 tx1.signTransaction(myKey)
 CharJSCoin.addTransaction(tx1)
 
+console.log('\n Starting the miner...')
 CharJSCoin.minePendingTranscations(myWalletAddress)
 
-console.log(CharJSCoin.getBalanceOfAddress(myWalletAddress))
+console.log('Balance: ', CharJSCoin.getBalanceOfAddress(myWalletAddress))
 
 // CharJSCoin.chain[1].transactions[0].amount = 1
 
-console.log(CharJSCoin.isChainValid())
+// console.log(CharJSCoin.isChainValid())

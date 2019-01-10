@@ -144,7 +144,6 @@ class Blockchain {
   // getBalanceOfAddress(address) {
   //   // start balance at zero
   //   let balance = 0
-
   //   // nested for loops yeeeaaa....
   //   // loop over all the blocks in the chain
   //   for (const block of this.chain) {
@@ -160,7 +159,6 @@ class Blockchain {
   //       }
   //     }
   //   }
-
   //   return balance
   // }
 

@@ -21,46 +21,46 @@ class Transaction {
   // add a calculateHash method to generate the hash of a transaction.
   // instead of signing the trans. we will signing the hash of it.
 
-  calculateHash() {
-    return SHA256(this.fromAddress + this.toAddress + this.amount).toString()
-  }
+  // calculateHash() {
+  //   return SHA256(this.fromAddress + this.toAddress + this.amount).toString()
+  // }
 
   // add a method called signTransaction
   // signingKey arguement is a obj. that contains the private and public key
 
-  signTransaction(signingKey) {
-    // before we sign below, check if the public key == fromAddress
+  // signTransaction(signingKey) {
+  //   // before we sign below, check if the public key == fromAddress
 
-    if (signingKey.getPublic('hex') !== this.fromAddress) {
-      throw new Error('cannot sign transactions for other wallets')
-    }
+  //   if (signingKey.getPublic('hex') !== this.fromAddress) {
+  //     throw new Error('cannot sign transactions for other wallets')
+  //   }
 
-    // create the hash of a transaction
-    const hashTx = this.calculateHash()
-    // create a signature from the hash in base64 format
-    const sig = signingKey.sign(hashTx, 'base64')
-    // store the the signature in the trans. derEnconding (just a special format) in hex form
-    this.signature = sig.toDER('hex')
-  }
+  //   // create the hash of a transaction
+  //   const hashTx = this.calculateHash()
+  //   // create a signature from the hash in base64 format
+  //   const sig = signingKey.sign(hashTx, 'base64')
+  //   // store the the signature in the trans. derEnconding (just a special format) in hex form
+  //   this.signature = sig.toDER('hex')
+  // }
 
   // Lets add another method to verify if the trans. has been correctly signined
 
-  isValid() {
-    // Mining reward case: since fromAddress is null from a mining reward trans return true
-    if (this.fromAddress === null) return true
+  // isValid() {
+  //   // Mining reward case: since fromAddress is null from a mining reward trans return true
+  //   if (this.fromAddress === null) return true
 
-    // If the from address is NOT null we need to do additional checks.
-    // check if a signature is present
-    if (!this.signature || this.signature.length === 0) {
-      throw new Error('No Signature in the transaction')
-    }
+  //   // If the from address is NOT null we need to do additional checks.
+  //   // check if a signature is present
+  //   if (!this.signature || this.signature.length === 0) {
+  //     throw new Error('No Signature in the transaction')
+  //   }
 
-    // at this point we now need to verify if the trans was signed with the correct key
-    // make a new public key object from the from address since the from address is a pub. key
-    const publicKey = ec.keyFromPublic(this.fromAddress, 'hex')
-    // returns boolean if signature matches with hash and publicKey
-    return publicKey.verify(this.calculateHash(), this.signature)
-  }
+  //   // at this point we now need to verify if the trans was signed with the correct key
+  //   // make a new public key object from the from address since the from address is a pub. key
+  //   const publicKey = ec.keyFromPublic(this.fromAddress, 'hex')
+  //   // returns boolean if signature matches with hash and publicKey
+  //   return publicKey.verify(this.calculateHash(), this.signature)
+  // }
 }
 
 class Block {
@@ -95,15 +95,15 @@ class Block {
 
   // add method hasValidTransaction to verify all trans. in current block
 
-  hasValidTransaction() {
-    // method loops over all trans. to check signature
-    for (const tx of this.transactions) {
-      if (!tx.isValid()) {
-        return false
-      }
-    }
-    return true
-  }
+  // hasValidTransaction() {
+  //   // method loops over all trans. to check signature
+  //   for (const tx of this.transactions) {
+  //     if (!tx.isValid()) {
+  //       return false
+  //     }
+  //   }
+  //   return true
+  // }
 }
 
 // modify isChainValid Method
@@ -147,16 +147,16 @@ class Blockchain {
 
   //.... changed previously createTransaction
 
-  addTransaction(transaction) {
-    if (!transaction.fromAddress || !transaction.toAddress) {
-      throw new Error('Transaction must include a from and to address')
-    }
+  // addTransaction(transaction) {
+  //   if (!transaction.fromAddress || !transaction.toAddress) {
+  //     throw new Error('Transaction must include a from and to address')
+  //   }
 
-    if (!transaction.isValid()) {
-      throw new Error('Cannot add invalid transaction to chain')
-    }
-    this.pendingTransactions.push(transaction)
-  }
+  //   if (!transaction.isValid()) {
+  //     throw new Error('Cannot add invalid transaction to chain')
+  //   }
+  //   this.pendingTransactions.push(transaction)
+  // }
 
   getBalanceOfAddress(address) {
     let balance = 0
@@ -185,9 +185,9 @@ class Blockchain {
 
       // lets add a check to verify if all the trans. in the currentBlock are valid
 
-      if (!currentBlock.hasValidTransaction()) {
-        return false
-      }
+      // if (!currentBlock.hasValidTransaction()) {
+      //   return false
+      // }
 
       if (currentBlock.hash !== currentBlock.calculateHash()) {
         return false

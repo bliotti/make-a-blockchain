@@ -59,22 +59,22 @@ class Block {
 
 // Now lets work on our main blockchain class
 
-// #1 Add mining reward
-// #2 Add a place to store pending transactions
-// #3 Add a new method to mine a new block for the pending transactions
+// #1 ADD mining reward
+// #2 ADD a place to store pending transactions
+// #3 ADD a new method to mine a new block for the pending transactions
 
 // Since we want to only create blocks on a speceifc interval (10 mins on Bitcoin)
 // all trans made between blocks are temp stored in a pending trans array in (mempool)
 
-// add pending transactions
-// add mining reward
+// ADD pending transactions
+// ADD mining reward
 
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()]
     this.difficulty = 4
     // this.pendingTransactions = []
-    this.miningReward = 100
+    // this.miningReward = 100
   }
 
   createGenesisBlock() {
@@ -90,8 +90,6 @@ class Blockchain {
 
   // When a miner calls this method, they pass along their address to recieve the reward
   // if they are able to successfully mine the block
-
-  //
 
   // minePendingTranscations(miningRewardAddress) {
   //   let block = new Block(

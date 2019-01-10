@@ -35,3 +35,5 @@ tamper with our blocks.
 ### Final 
 
 * branches with *commented-final* or *final* are completed solutions.
+
+SLIDES https://docs.google.com/presentation/d/15LVoFj7m2d0kZzJaGNSGMuDrRcT-jwOCv0srXMug2nk/edit?usp=sharing

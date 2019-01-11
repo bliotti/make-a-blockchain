@@ -7,21 +7,24 @@ const SHA256 = require('crypto-js/sha256')
 // for now data will represent our transactions
 
 class Block {
-  // constructor(index, timestamp, data, previousHash) {
-  //   this.index = index
-  //   this.timestamp = timestamp
-  //   this.data = data
-  //   this.previousHash = previousHash
-  //   this.hash = this.calculateHash()
-  // }
+  constructor(index, timestamp, data, previousHash) {
+    this.index = index
+    this.timestamp = timestamp
+    this.data = data
+    this.previousHash = previousHash
+    this.hash = this.calculateHash()
+  }
 
   // Here we will hash the contents of our block
   // SHA256 returns this as an object so we need to convert this to a string
-  calculateHash() {
-    // return SHA256(
-    //   this.data + this.previousHash + this.timestamp + JSON.stringify(this.data)
-    // ).toString()
-  }
+  // calculateHash() {
+  //   return SHA256(
+  //     this.index +
+  //       this.previousHash +
+  //       this.timestamp +
+  //       JSON.stringify(this.data)
+  //   ).toString()
+  // }
 }
 
 // BLOCKCHAIN CLASS

@@ -1,14 +1,11 @@
 # Build a Blockchain from scratch (NodeJS).
-### Learn
-- What is behind a blockchain by using simple code.
 
-- It's not a complete implementation, but enough to understand how blockchains
-work and how they guarantee that blocks can never be changed.
+### Learn
+- What is behind a blockchain by using simple code. It's not a complete implementation, but enough to understand how blockchains work and how they guarantee that blocks can never be changed.
 
 - After creating our blockchain we'll try and tamper with it. This will demonstrate a blockchains ability to detect fraud.
 
-- Adding the proof-of-work mechanism to our homemade Javascript blockchain. Proof-of-work will secure our blockchain against spammers and people trying to
-tamper with our blocks.
+- Adding the proof-of-work mechanism to our homemade Javascript blockchain. Proof-of-work will secure our blockchain against spammers and people trying to tamper with our blocks.
 
 ## Getting Started
 

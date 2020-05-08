@@ -1,5 +1,7 @@
 # Build a Blockchain from scratch (NodeJS).
 
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/P5P81OVFS)
+
 ### Learn
 - What is behind a blockchain by using simple code. It's not a complete implementation, but enough to understand how blockchains work and how they guarantee that blocks can never be changed.
 

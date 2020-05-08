@@ -7,6 +7,8 @@
 
 - Adding the proof-of-work mechanism to our homemade Javascript blockchain. Proof-of-work will secure our blockchain against spammers and people trying to tamper with our blocks.
 
+- :) 
+
 ## Getting Started
 
 * `git clone https://github.com/bliotti/make-a-blockchain`
